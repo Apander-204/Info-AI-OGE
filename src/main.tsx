@@ -2,6 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router";
 import { HomeScreen } from "@/pages/home-screen";
+import { MainScreen } from "@/pages/main-screen";
 import { NotFound } from "@/pages/not-found";
 import { RouteProvider } from "@/providers/router-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
@@ -13,7 +14,8 @@ createRoot(document.getElementById("root")!).render(
             <BrowserRouter>
                 <RouteProvider>
                     <Routes>
-                        <Route path="/" element={<HomeScreen />} />
+                        <Route path="/" element={<div className="flex justify-center items-center h-screen"><HomeScreen /></div>} />
+                        <Route path="/main" element={<MainScreen />} />
                         <Route path="*" element={<NotFound />} />
                     </Routes>
                 </RouteProvider>
