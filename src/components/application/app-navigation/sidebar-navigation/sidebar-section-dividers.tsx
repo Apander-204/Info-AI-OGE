@@ -2,7 +2,6 @@ import { SearchLg } from "@untitledui/icons";
 import { Input } from "@/components/base/input/input";
 import { UntitledLogo } from "@/components/foundations/logo/untitledui-logo";
 import { MobileNavigationHeader } from "../base-components/mobile-header";
-import { NavAccountCard } from "../base-components/nav-account-card";
 import { NavList } from "../base-components/nav-list";
 import type { NavItemDividerType, NavItemType } from "../config";
 
@@ -38,7 +37,7 @@ export const SidebarNavigationSectionDividers = ({ activeUrl, items }: SidebarNa
             <NavList activeUrl={activeUrl} items={items} />
 
             <div className="mt-auto flex flex-col gap-5 px-2 py-4 lg:gap-6 lg:px-4 lg:py-4">
-                <NavAccountCard />
+
             </div>
         </aside>
     );

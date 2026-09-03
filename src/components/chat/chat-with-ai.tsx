@@ -7,17 +7,23 @@ export const ChatWithAI: FC = () =>  {
     return(
 
         <section className="prose flex-1 flex flex-col max-w-none">
-            <div className="">
+            <div className="fixed ml-5 p-4">
                 <p>Title Chat</p>
             </div>
             <div className="flex justify-center items-center flex-col">
-                <div className="w-[45%] flex flex-col gap-8">
+                <div className="w-[45%] flex flex-col gap-8 flex-1 mb-35">
+                    <MessageAI alt="AI"/>
+                    <MessageMe />
+                    <MessageAI alt="AI"/>
+                    <MessageMe />
+                    <MessageAI alt="AI"/>
+                    <MessageMe />
                     <MessageAI alt="AI"/>
                     <MessageMe />
                     <MessageAI alt="AI"/>
                     <MessageMe />
                 </div>
-                <div className="w-[40%] flex bottom-6 fixed">
+                <div className="w-[40%] flex bottom-6 fixed pt-5 overflow-hidden">
                     <MessageInput />
                 </div>
             </div>

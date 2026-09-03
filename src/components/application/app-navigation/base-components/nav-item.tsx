@@ -5,7 +5,7 @@ import { Badge } from "@/components/base/badges/badges";
 import { cx, sortCx } from "@/utils/cx";
 
 const styles = sortCx({
-    root: "group relative flex max-h-9 w-full cursor-pointer items-center rounded-md bg-primary outline-focus-ring transition duration-100 ease-linear select-none hover:bg-primary_hover focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-2",
+    root: "group relative flex w-full cursor-pointer items-center rounded-md bg-primary outline-focus-ring transition duration-100 ease-linear select-none hover:bg-primary_hover focus-visible:z-10 focus-visible:outline-2 focus-visible:outline-offset-2 min-h-9 py-2",
     rootSelected: "bg-secondary hover:bg-secondary_hover",
 });
 
@@ -32,7 +32,7 @@ interface NavItemBaseProps {
     children?: ReactNode;
 }
 
-export const NavItemBase = ({ current, type, badge, href, icon: Icon, children, truncate = true, onClick }: NavItemBaseProps) => {
+export const NavItemBase = ({ current, type, badge, href, icon: Icon, children, truncate = false, onClick }: NavItemBaseProps) => {
     const iconElement = Icon && (
         <Icon
             aria-hidden="true"

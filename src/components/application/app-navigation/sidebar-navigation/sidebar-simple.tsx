@@ -69,7 +69,7 @@ export const SidebarNavigationSimple = ({
                     <ul className="flex flex-col">
                         {footerItems.map((item) => (
                             <li key={item.label} className="py-px">
-                                <NavItemBase badge={item.badge} icon={item.icon} href={item.href} type="link" current={item.href === activeUrl}>
+                                <NavItemBase badge={item.badge} icon={item.icon} href={item.href} type="link" current={item.href === activeUrl} truncate={false}>
                                     {item.label}
                                 </NavItemBase>
                             </li>

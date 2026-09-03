@@ -18,12 +18,12 @@ export const NavList = ({ activeUrl, items, className }: NavListProps) => {
     const [currentItem, setCurrentItem] = useState(activeItem);
 
     return (
-        <ul className={cx("flex flex-col px-4 pt-5", className)}>
+        <ul className={cx("flex flex-col", className)}>
             {items.map((item, index) => {
                 if (item.divider) {
                     return (
-                        <li key={index} className="w-full px-0.5 py-2">
-                            <hr className="h-px w-full border-none bg-border-secondary" />
+                        <li key={index} className="w-full px-0.5 list-none m-0 p-0">
+                            <hr className="h-px w-full border-none bg-border-secondary my-0" />
                         </li>
                     );
                 }
@@ -44,9 +44,9 @@ export const NavList = ({ activeUrl, items, className }: NavListProps) => {
                             </NavItemBase>
 
                             <dd>
-                                <ul className="pb-1">
+                                <ul className="pb-1 list-none">
                                     {item.items.map((childItem) => (
-                                        <li key={childItem.label} className="py-0.25">
+                                        <li key={childItem.label} className="">
                                             <NavItemBase
                                                 href={childItem.href}
                                                 badge={childItem.badge}
@@ -64,7 +64,7 @@ export const NavList = ({ activeUrl, items, className }: NavListProps) => {
                 }
 
                 return (
-                    <li key={item.label} className="py-px">
+                    <li key={item.label} className="py-px list-none">
                         <NavItemBase
                             type="link"
                             badge={item.badge}
