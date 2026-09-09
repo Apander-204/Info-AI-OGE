@@ -26,6 +26,8 @@ interface SidebarNavigationProps {
     className?: string;
     /** Whether to round the account card avatar. */
     avatarRounded?: boolean;
+
+    onLessonClick?: (lessonNumber: number) => void;
 }
 
 export const SidebarNavigationSimple = ({
@@ -36,6 +38,7 @@ export const SidebarNavigationSimple = ({
     showAccountCard = true,
     hideBorder = false,
     className,
+    onLessonClick,
 }: SidebarNavigationProps) => {
     const MAIN_SIDEBAR_WIDTH = 280;
 

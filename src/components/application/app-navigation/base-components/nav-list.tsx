@@ -52,6 +52,7 @@ export const NavList = ({ activeUrl, items, className }: NavListProps) => {
                                                 badge={childItem.badge}
                                                 type="collapsible-child"
                                                 current={activeUrl === childItem.href}
+                                                
                                             >
                                                 {childItem.label}
                                             </NavItemBase>
@@ -72,6 +73,7 @@ export const NavList = ({ activeUrl, items, className }: NavListProps) => {
                             href={item.href}
                             current={currentItem?.href === item.href}
                             open={open && currentItem?.href === item.href}
+                            onClick={item.onClick}
                         >
                             {item.label}
                         </NavItemBase>

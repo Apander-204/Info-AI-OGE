@@ -27,7 +27,7 @@ interface NavItemBaseProps {
     /** Whether to truncate the label text. */
     truncate?: boolean;
     /** Handler for click events. */
-    onClick?: MouseEventHandler;
+    onClick?: any;
     /** Content to display. */
     children?: ReactNode;
 }
