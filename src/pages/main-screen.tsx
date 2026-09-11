@@ -5,6 +5,8 @@ import { inicialisationLocalStorage, initializationLocalStorage } from "@/utils/
 
 export const MainScreen: FC = () =>  {
 
+    const allMessages = useState([]);
+
     useEffect(() => {
         initializationLocalStorage();
     }, []);

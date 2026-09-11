@@ -2,7 +2,11 @@ import { FC } from "react";
 import { Avatar } from "../base/avatar/avatar";
 import { AvatarProps } from "../base/avatar/avatar";
 
-export const MessageAI: FC = () =>  {
+interface MessageProps {
+    message: string;
+}
+
+export const MessageAI: FC<MessageProps> = ({message}) =>  {
 
     return(
 
@@ -12,7 +16,7 @@ export const MessageAI: FC = () =>  {
                 <p><b>AI</b></p>
             </div>
             <div className="bg-secondary rounded-2xl p-1 pl-1 pr-1 w-auto">
-                <p>Hello! I'm AI tutorik</p>
+                <p>{message}</p>
             </div>
         </section>
 
@@ -20,13 +24,13 @@ export const MessageAI: FC = () =>  {
     
 };
 
-export const MessageMe: FC<AvatarProps> = () =>  {
+export const MessageMe: FC<MessageProps> = ({message}) =>  {
 
     return(
 
         <section className="prose flex flex-col gap-2 flex-1 max-w-none">
             <div className="shadow-sm rounded-2xl p-1 pl-1 pr-1 w-auto text-right ring-1 shadow-xs">
-                <p>Hello! I'm AI tutorik</p>
+                <p>{message}</p>
             </div>
         </section>
 
