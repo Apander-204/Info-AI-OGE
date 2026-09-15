@@ -18,6 +18,16 @@ export const initializationLocalStorage = () => {
         localStorage.setItem("15", JSON.stringify([]));
         localStorage.setItem("16", JSON.stringify([]));
     }
+
+    let result = [];
+
+    for(let i = 0; i<=16; i++) {
+        let value = localStorage.getItem(String(i));
+        result.push(value ? JSON.parse(value) : []);
+        console.log(value);
+    }
+
+    return result;
 }
 
 export const addMessage = ({activeLesson, message, author}: {activeLesson: number, message: string, author: string}) => {

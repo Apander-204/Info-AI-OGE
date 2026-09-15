@@ -1,14 +1,14 @@
 import { FC, useEffect, useState } from "react";
 import { SidebarNavigationSimple } from "@/components/application/app-navigation/sidebar-navigation/sidebar-simple";
 import { ChatWithAI } from "@/components/chat/chat-with-ai";
-import { inicialisationLocalStorage, initializationLocalStorage } from "@/utils/localStorage";
+import { initializationLocalStorage } from "@/utils/localStorage";
 
 export const MainScreen: FC = () =>  {
 
-    const allMessages = useState([]);
+    const [allMessages, addAllMessages] = useState([]);
 
     useEffect(() => {
-        initializationLocalStorage();
+        addAllMessages(initializationLocalStorage());
     }, []);
 
     const [activeLesson, setActiveLesson] = useState<number>(0);
@@ -119,7 +119,7 @@ export const MainScreen: FC = () =>  {
             <h2>Tasks</h2>
             <div className="flex flex-1 w-full">
                 <SidebarNavigationSimple items={items} showAccountCard={false} className={"whitespace-normal"} onLessonClick={handleNavItemClick} />
-                <ChatWithAI activeLesson={activeLesson} lessons={items} />
+                <ChatWithAI activeLesson={activeLesson} lessons={items} allMessages={allMessages} addAllMessages={addAllMessages} />
             </div>
         </main>
 

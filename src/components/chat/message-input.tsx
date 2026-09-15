@@ -2,14 +2,14 @@ import { FC, useRef } from "react";
 import { TextAreaBase } from "../base/textarea/textarea";
 import { Button } from "../base/buttons/button";
 import { Send03 } from "@untitledui/icons";
-import {generateContent} from "../../utils/GeminiAPI";
+import { generateContent } from "../../utils/GeminiAPI";
 import { addMessage } from "@/utils/localStorage";
 
 interface MessageInputProps {
     activeLesson: number;
 }
 
-export const MessageInput: FC<MessageInputProps> = ({activeLesson}) =>  {
+export const MessageInput: FC<MessageInputProps> = ({activeLesson, addAllMessages, allMessages}) =>  {
 
     const inputRef = useRef<null | string>(null);
 
@@ -18,6 +18,13 @@ export const MessageInput: FC<MessageInputProps> = ({activeLesson}) =>  {
         const author = "Me";
         console.log(activeLesson);
         addMessage({activeLesson, message, author});
+        addAllMessages(prev => {
+            const next = prev.map(arr => [...arr]);
+            next[activeLesson] = [...next[activeLesson], { activeLesson, message, author }];
+            return next;
+        });
+
+        inputRef.current.value = "";
     };
 
     return(

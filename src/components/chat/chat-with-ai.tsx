@@ -11,10 +11,12 @@ interface ChatWithAITypes {
     }[];
 }
 
-export const ChatWithAI: FC<ChatWithAITypes> = ({activeLesson, lessons}) =>  {
+export const ChatWithAI: FC<ChatWithAITypes> = ({activeLesson, lessons, allMessages, addAllMessages}) =>  {
 
-    const getter = localStorage.getItem(String(activeLesson));
-    const messages = getter ? JSON.parse(getter) : [];
+    // const getter = localStorage.getItem(String(activeLesson));
+    // const messages = getter ? JSON.parse(getter) : [];
+
+    const messages = allMessages[activeLesson];
 
     return(
 
@@ -34,12 +36,12 @@ export const ChatWithAI: FC<ChatWithAITypes> = ({activeLesson, lessons}) =>  {
                                 else if(message.author == "Me") {
                                     return <MessageMe message={message.message} key={index}/>
                                 }
-                                
+
                             })
                         }
                     </div>
                     <div className="w-[40%] flex bottom-6 fixed pt-5 overflow-hidden">
-                        <MessageInput activeLesson={activeLesson} />
+                        <MessageInput activeLesson={activeLesson} addAllMessages={addAllMessages} allMessages={allMessages}/>
                     </div></>
                 : ("no")}
                 
