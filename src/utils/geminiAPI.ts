@@ -1,7 +1,7 @@
 import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({
-  apiKey: "API KEY",
+  apiKey: import.meta.env.GEMINI_API_KEY,
 });
 
 export const generateContent = async (prompt: string) => {
@@ -11,10 +11,11 @@ export const generateContent = async (prompt: string) => {
       contents: prompt,
     });
 
-    alert(response.text);
+    alert(response.text)
+    return(response.text);
   } 
   catch (error) {
     console.error("Ошибка Gemini:", error);
-    alert("Произошла ошибка при обращении к Gemini");
+    return("Произошла ошибка при обращении к Gemini");
   }
 };

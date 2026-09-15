@@ -1,9 +1,12 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useMemo, useRef, useState } from "react";
 import { SidebarNavigationSimple } from "@/components/application/app-navigation/sidebar-navigation/sidebar-simple";
 import { ChatWithAI } from "@/components/chat/chat-with-ai";
 import { initializationLocalStorage } from "@/utils/localStorage";
+import { topics } from "@/utils/items";
 
 export const MainScreen: FC = () =>  {
+
+    let items = topics;
 
     const [allMessages, addAllMessages] = useState([]);
 
@@ -17,94 +20,7 @@ export const MainScreen: FC = () =>  {
         setActiveLesson(lessonNumber);
     }
 
-    let items = [
-    {
-        label: "Часть 1:",
-    },
-    {
-        number: 1,
-        label: "Количественные параметры информационных объектов",
-        href: "/main",
-    },
-    {
-        number: 2,
-        label: "Кодирование и декодирование информации",
-        href: "/main",
-    },
-    {
-        number: 3,
-        label: "Значение логического выражения",
-        href: "/main",
-    },
-    {
-        number: 4,
-        label: "Формальные описания реальных объектов и процессов",
-        href: "/main",
-    },
-    {
-        number: 5,
-        label: "Простой линейный алгоритм для формального исполнителя",
-        href: "/main",
-    },
-    {
-        number: 6,
-        label: "Программа с условным оператором",
-        href: "/main",
-    },
-    {
-        number: 7,
-        label: "Информационно-коммуникационные технологии",
-        href: "/main",
-    },
-    {
-        number: 8,
-        label: "Запросы для поисковых систем с использованием логических выражений",
-        href: "/main",
-    },
-    {
-        number: 9,
-        label: "Анализирование информации, представленной в виде схем",
-        href: "/main",
-    },
-    {
-        number: 10,
-        label: "Сравнение чисел в различных системах счисления",
-        href: "/main",
-    },
-    {
-        number: 11,
-        label: "Использование поиска операционной системы и текстового редактора",
-        href: "/main",
-    },
-    {
-        number: 12,
-        label: "Использование поисковых средств операционной системы",
-        href: "/main",
-    },
-    {
-        label: "Часть 2:",
-    },
-    {
-        number: 13,
-        label: "Использование поисковых средств операционной системы",
-        href: "/main",
-    },
-    {
-        number: 14,
-        label: "Обработка большого массива данных",
-        href: "/main",
-    },
-    {
-        number: 15,
-        label: "Короткий алгоритм в различных средах исполнения",
-        href: "/main",
-    },
-    {
-        number: 16,
-        label: "Программирование",
-        href: "/main",
-    }
-    ];
+    const [querySearch, setQuerySearch] = useState("");
 
     items = items.map(item => 
         'number' in item && item.number 
@@ -112,13 +28,18 @@ export const MainScreen: FC = () =>  {
             : item
     );
 
+    const filteredItems = useMemo(() => {
+        const query = querySearch.trim().toLowerCase();
+        return items.filter(i => !("number" in i) || i.label.toLowerCase().includes(query));
+    }, [items, querySearch]);
+
 
     return(
 
         <main className="flex flex-col prose max-w-screen">
             <h2>Tasks</h2>
             <div className="flex flex-1 w-full">
-                <SidebarNavigationSimple items={items} showAccountCard={false} className={"whitespace-normal"} onLessonClick={handleNavItemClick} />
+                <SidebarNavigationSimple items={filteredItems} showAccountCard={false} className={"whitespace-normal"} onLessonClick={handleNavItemClick} querySearch={querySearch} setQuerySearch={setQuerySearch} activeLesson={activeLesson} />
                 <ChatWithAI activeLesson={activeLesson} lessons={items} allMessages={allMessages} addAllMessages={addAllMessages} />
             </div>
         </main>

@@ -39,6 +39,9 @@ export const SidebarNavigationSimple = ({
     hideBorder = false,
     className,
     onLessonClick,
+    querySearch,
+    setQuerySearch,
+    activeLesson
 }: SidebarNavigationProps) => {
     const MAIN_SIDEBAR_WIDTH = 280;
 
@@ -56,16 +59,38 @@ export const SidebarNavigationSimple = ({
             )}
         >
             <div className="flex flex-col gap-5 px-4 lg:px-5">
-                <UntitledLogo className="h-6" />
+                <div >
+                    <h5>InfoAIOGE</h5>
+                </div>
 
                 {/* Mobile search input */}
-                <Input size="md" aria-label="Search" placeholder="Search" icon={SearchLg} className="md:hidden" />
+                <Input size="md" aria-label="Search" placeholder="Search" icon={SearchLg} className="md:hidden" value={querySearch} onChange={(e) => setQuerySearch(e)} />
 
                 {/* Desktop search input */}
-                <Input shortcut size="sm" aria-label="Search" placeholder="Search" icon={SearchLg} className="max-md:hidden" />
+                <Input shortcut size="sm" aria-label="Search" placeholder="Search" icon={SearchLg} className="max-md:hidden" value={querySearch} onChange={(e) => setQuerySearch(e)} />
             </div>
 
-            <NavList activeUrl={activeUrl} items={items} />
+            <ul className="flex flex-col gap-1 px-4 lg:px-5 list-none pl-0">
+                {items.map((item, idx) => {
+                    const isHeader = !("number" in item) || !item.number;
+
+                    if (isHeader) {
+                    return (
+                        <li key={idx} className="px-2 pt-4 pb-1 text-xs font-semibold text-fg-quaternary uppercase">
+                            {item.label}
+                        </li>
+                    );
+                    }
+
+                    return (
+                        <li key={item.number}>
+                            <NavItemBase type="link" href={item.href} current={item.number === activeLesson} onClick={() => onLessonClick?.(item.number)}>
+                                {item.label}
+                            </NavItemBase>
+                        </li>
+                    );
+                })}
+            </ul>
 
             <div className="mt-auto flex flex-col gap-3 px-4 py-4 lg:py-5">
                 {footerItems.length > 0 && (
