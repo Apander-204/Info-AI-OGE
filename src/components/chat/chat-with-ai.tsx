@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useRef } from "react";
 import { MessageAI, MessageMe } from "./message";
 import { MessageInput } from "./message-input";
 
@@ -13,10 +13,12 @@ interface ChatWithAITypes {
 
 export const ChatWithAI: FC<ChatWithAITypes> = ({activeLesson, lessons, allMessages, addAllMessages}) =>  {
 
-    // const getter = localStorage.getItem(String(activeLesson));
-    // const messages = getter ? JSON.parse(getter) : [];
-
     const messages = allMessages[activeLesson];
+    const pageRef = useRef(null);
+
+    useEffect(() => {
+        pageRef.current?.scrollIntoView({ behavior: "auto" });
+    }, [messages]);
 
     return(
 
@@ -39,6 +41,7 @@ export const ChatWithAI: FC<ChatWithAITypes> = ({activeLesson, lessons, allMessa
 
                             })
                         }
+                        <div ref={pageRef} />
                     </div>
                     <div className="w-[40%] flex bottom-6 fixed pt-5 overflow-hidden">
                         <MessageInput activeLesson={activeLesson} addAllMessages={addAllMessages} allMessages={allMessages}/>
