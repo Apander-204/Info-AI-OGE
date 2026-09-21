@@ -38,10 +38,16 @@ export const MessageInput: FC<MessageInputProps> = ({activeLesson, addAllMessage
         setButtonIsDisabled(false);
     };
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if(e.key==="Enter" && !e.shiftKey) {
+            buttonClick();
+        }
+    };
+
     return(
 
         <div className="flex flex-1 w-full items-center gap-4">
-            <TextAreaBase className={"bg-secondary resize-none"} ref={inputRef} />
+            <TextAreaBase className={"bg-secondary resize-none"} ref={inputRef} onKeyDown={handleKeyDown} />
             <Button className="size-12" onClick={() => buttonClick()} isDisabled={buttonIsDisabled} ><Send03 /></Button>
         </div>
 

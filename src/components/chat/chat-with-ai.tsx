@@ -13,7 +13,7 @@ interface ChatWithAITypes {
 
 export const ChatWithAI: FC<ChatWithAITypes> = ({activeLesson, lessons, allMessages, addAllMessages}) =>  {
 
-    const messages = allMessages[activeLesson-1];
+    const messages = allMessages[activeLesson];
     const pageRef = useRef(null);
 
     useEffect(() => {
@@ -46,7 +46,11 @@ export const ChatWithAI: FC<ChatWithAITypes> = ({activeLesson, lessons, allMessa
                     <div className="w-[40%] flex bottom-6 fixed pt-5 overflow-hidden">
                         <MessageInput activeLesson={activeLesson} addAllMessages={addAllMessages} allMessages={allMessages}/>
                     </div></>
-                : ("no")}
+                : (
+                    <div>
+                        <h3>Выберите тему</h3>
+                    </div>
+                )}
                 
             </div>
         </section>

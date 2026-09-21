@@ -15,7 +15,7 @@ export const getAllMessages = () => {
 
     let result = [];
 
-    for(let i = 1; i<=16; i++) {
+    for(let i = 0; i<=16; i++) {
         let value = localStorage.getItem(String(i));
         result.push(value ? JSON.parse(value) : []);
     }
