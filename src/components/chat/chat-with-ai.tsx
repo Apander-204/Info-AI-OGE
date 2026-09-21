@@ -24,12 +24,12 @@ export const ChatWithAI: FC<ChatWithAITypes> = ({activeLesson, lessons, allMessa
     return(
 
         <section className="prose flex-1 flex flex-col max-w-none">
-            <div className="fixed ml-5 p-4 w-[20%]">
+            <div className="hidden md:block fixed ml-5 p-4 w-[20%]">
                 <p>{activeLesson ? lessons.find(arr => arr.number==activeLesson)?.label : "Не выбрана никакая тема."}</p>
             </div>
-            <div className="flex justify-center items-center flex-col">
+            <div className="flex justify-center items-center flex-col mt-12">
                 {activeLesson ? <>
-                    <div className="w-[45%] flex flex-col gap-8 flex-1 mb-35">
+                    <div className="w-[80%] md:w-[45%] flex flex-col gap-8 flex-1 mb-35">
                         {
                             messages.map((message, index) => {
 
@@ -44,7 +44,7 @@ export const ChatWithAI: FC<ChatWithAITypes> = ({activeLesson, lessons, allMessa
                         }
                         <div ref={pageRef} />
                     </div>
-                    <div className="w-[40%] flex bottom-6 fixed pt-5 overflow-hidden">
+                    <div className="w-[75%] md:w-[40%] flex bottom-6 fixed pt-5 overflow-hidden">
                         <MessageInput activeLesson={activeLesson} addAllMessages={addAllMessages} allMessages={allMessages}/>
                     </div></>
                 : (
@@ -52,7 +52,7 @@ export const ChatWithAI: FC<ChatWithAITypes> = ({activeLesson, lessons, allMessa
                         <h3>Выберите тему</h3>
                     </div>
                 )}
-                <div className="fixed right-[100px] top-16">
+                <div className="fixed right-[10px] md:right-[100px] top-16">
                     <ThemeSwitcher />
                 </div>
                 

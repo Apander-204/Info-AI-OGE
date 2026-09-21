@@ -59,7 +59,7 @@ export const SidebarNavigationSimple = ({
             )}
         >
             <div className="flex flex-col gap-5 px-4 lg:px-5">
-                <div >
+                <div>
                     <h5>InfoAIOGE</h5>
                 </div>
 

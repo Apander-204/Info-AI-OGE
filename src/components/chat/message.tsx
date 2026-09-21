@@ -13,7 +13,7 @@ export const MessageAI: FC<MessageProps> = ({message}) =>  {
 
         <section className="prose flex flex-col gap-2 flex-1 max-w-none">
             <div className="flex items-center gap-1.5">
-                <Avatar size="md" alt={"AI"} src="https://www.untitledui.com/images/avatars/olivia-rhye?fm=webp&q=80" />
+                <Avatar size="md" alt={"AI"} src="/aiAvatar.png" />
                 <p><b>AI</b></p>
             </div>
             <div className="bg-secondary rounded-2xl p-1 pl-1 pr-1 w-auto">

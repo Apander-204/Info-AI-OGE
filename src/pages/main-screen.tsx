@@ -38,8 +38,7 @@ export const MainScreen: FC = () =>  {
     return(
 
         <main className="flex flex-col prose max-w-screen">
-            <h2>Tasks</h2>
-            <div className="flex flex-1 w-full">
+            <div className="flex flex-col md:flex-row flex-1 w-full">
                 <SidebarNavigationSimple items={filteredItems} showAccountCard={false} className={"whitespace-normal"} onLessonClick={handleNavItemClick} querySearch={querySearch} setQuerySearch={setQuerySearch} activeLesson={activeLesson} />
                 <ChatWithAI activeLesson={activeLesson} lessons={items} allMessages={allMessages} addAllMessages={addAllMessages} />
             </div>
