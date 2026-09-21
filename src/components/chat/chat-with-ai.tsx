@@ -1,6 +1,7 @@
 import { FC, useEffect, useRef } from "react";
 import { MessageAI, MessageMe } from "./message";
 import { MessageInput } from "./message-input";
+import { ThemeSwitcher } from "./theme-switcher";
 
 interface ChatWithAITypes { 
     activeLesson: number;
@@ -51,6 +52,9 @@ export const ChatWithAI: FC<ChatWithAITypes> = ({activeLesson, lessons, allMessa
                         <h3>Выберите тему</h3>
                     </div>
                 )}
+                <div className="fixed right-[100px] top-16">
+                    <ThemeSwitcher />
+                </div>
                 
             </div>
         </section>
