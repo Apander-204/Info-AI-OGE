@@ -1,7 +1,7 @@
 import { FC, useEffect, useMemo, useRef, useState } from "react";
 import { SidebarNavigationSimple } from "@/components/application/app-navigation/sidebar-navigation/sidebar-simple";
 import { ChatWithAI } from "@/components/chat/chat-with-ai";
-import { initializationLocalStorage } from "@/utils/localStorage";
+import { initializationLocalStorage, getAllMessages } from "@/utils/localStorage";
 import { topics } from "@/utils/items";
 
 export const MainScreen: FC = () =>  {
@@ -11,7 +11,8 @@ export const MainScreen: FC = () =>  {
     const [allMessages, addAllMessages] = useState([]);
 
     useEffect(() => {
-        addAllMessages(initializationLocalStorage());
+        initializationLocalStorage();
+        addAllMessages(getAllMessages());
     }, []);
 
     const [activeLesson, setActiveLesson] = useState<number>(0);

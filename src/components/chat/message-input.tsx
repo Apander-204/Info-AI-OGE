@@ -27,7 +27,7 @@ export const MessageInput: FC<MessageInputProps> = ({activeLesson, addAllMessage
         inputRef.current.value = "";
 
         const prevMessage = message;
-        message = await generateContent(prevMessage);
+        message = await generateContent(prevMessage, activeLesson);
         author = "AI";
         addAllMessages(prev => {
             const next = prev.map(arr => [...arr]);

@@ -13,7 +13,7 @@ interface ChatWithAITypes {
 
 export const ChatWithAI: FC<ChatWithAITypes> = ({activeLesson, lessons, allMessages, addAllMessages}) =>  {
 
-    const messages = allMessages[activeLesson];
+    const messages = allMessages[activeLesson-1];
     const pageRef = useRef(null);
 
     useEffect(() => {
