@@ -1,4 +1,4 @@
-import { FC, useEffect, useMemo, useState } from "react";
+import { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { SidebarNavigationSimple } from "@/components/application/app-navigation/sidebar-navigation/sidebar-simple";
 import { ChatWithAI } from "@/components/chat/chat-with-ai";
 import { initializationLocalStorage, getAllMessages } from "@/utils/localStorage";
@@ -13,8 +13,6 @@ export const MainScreen: FC = () =>  {
 
     type MessagesType = MessageType[];
 
-    let items = topics;
-
     const [allMessages, addAllMessages] = useState<MessagesType[]>([]);
 
     useEffect(() => {
@@ -24,17 +22,21 @@ export const MainScreen: FC = () =>  {
 
     const [activeLesson, setActiveLesson] = useState<number>(0);
 
-    const handleNavItemClick = (lessonNumber: number) => {
+    const handleNavItemClick = useCallback((lessonNumber: number) => {
         setActiveLesson(lessonNumber);
-    }
+    }, []);
+
+    const items = useMemo(
+        () =>
+            topics.map(item =>
+                typeof item.number === "number"
+                    ? { ...item, onClick: () => handleNavItemClick(item.number!) }
+                    : item
+            ),
+        [handleNavItemClick]
+    );
 
     const [querySearch, setQuerySearch] = useState("");
-
-    items = items.map(item => 
-        'number' in item && item.number 
-            ? { ...item, onClick: () => handleNavItemClick(item.number!) }
-            : item
-    );
 
     const filteredItems = useMemo(() => {
         const query = querySearch.trim().toLowerCase();
