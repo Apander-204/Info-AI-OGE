@@ -17,7 +17,7 @@ export const MessageAI: FC<MessageProps> = ({message}) =>  {
                 <p><b>AI</b></p>
             </div>
             <div className="bg-secondary rounded-2xl p-1 pl-1 pr-1 w-auto">
-                <ReactMarkdown remarkPlugins={remarkGfm} >
+                <ReactMarkdown remarkPlugins={[remarkGfm]} >
                     {message}
                 </ReactMarkdown>
             </div>
@@ -32,8 +32,8 @@ export const MessageMe: FC<MessageProps> = ({message}) =>  {
     return(
 
         <section className="prose flex flex-col gap-2 flex-1 max-w-none">
-            <div className="shadow-sm rounded-2xl p-1 pl-1 pr-1 w-auto text-right ring-1 shadow-xs">
-                <ReactMarkdown remarkPlugins={remarkGfm} >
+            <div className="shadow-sm rounded-2xl p-1 pl-1 pr-1 w-auto text-right ring-1">
+                <ReactMarkdown remarkPlugins={[remarkGfm]} >
                     {message}
                 </ReactMarkdown>
             </div>

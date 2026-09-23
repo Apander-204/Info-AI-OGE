@@ -1,5 +1,12 @@
 import { prompts } from "./aiPrompts";
 
+type MessageType = {
+    author: string;
+    message: string;
+};
+
+type MessagesType = MessageType[];
+
 export const initializationLocalStorage = () => {
 
     prompts.forEach((prompt) => {
@@ -11,9 +18,9 @@ export const initializationLocalStorage = () => {
 
 }
 
-export const getAllMessages = () => {
+export const getAllMessages: () => MessagesType[] = () =>  {
 
-    let result = [];
+    let result:MessagesType[] = [];
 
     for(let i = 0; i<=16; i++) {
         let value = localStorage.getItem(String(i));
@@ -26,8 +33,12 @@ export const getAllMessages = () => {
 
 export const addMessage = ({activeLesson, message, author}: {activeLesson: number, message: string, author: string}) => {
     const key = String(activeLesson);
-    let data = JSON.parse(localStorage.getItem(key));
+    const raw = localStorage.getItem(key);
+
+    let data: MessagesType = raw ? JSON.parse(raw) : [];
+
     data.push({author: author, message: message});
+
     localStorage.setItem(key, JSON.stringify(data));
 }
 

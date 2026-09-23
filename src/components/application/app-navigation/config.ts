@@ -14,6 +14,8 @@ export type NavItemType = {
     /** Whether this nav item is a divider. */
     divider?: boolean;
 
+    number?: number;
+
     onClick?: (lessonNumber: number) => void;
 };
 

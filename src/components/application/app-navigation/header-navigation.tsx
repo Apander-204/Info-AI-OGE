@@ -7,7 +7,6 @@ import { Input } from "@/components/base/input/input";
 import { UntitledLogo } from "@/components/foundations/logo/untitledui-logo";
 import { cx } from "@/utils/cx";
 import { MobileNavigationHeader } from "./base-components/mobile-header";
-import { NavAccountCard } from "./base-components/nav-account-card";
 import { NavButton } from "./base-components/nav-button";
 import { NavItemBase } from "./base-components/nav-item";
 import { NavList } from "./base-components/nav-list";
@@ -152,8 +151,6 @@ export const HeaderNavigationBase = ({
                                 Open in browser
                             </NavItemBase>
                         </div>
-
-                        <NavAccountCard />
                     </div>
                 </aside>
             </MobileNavigationHeader>

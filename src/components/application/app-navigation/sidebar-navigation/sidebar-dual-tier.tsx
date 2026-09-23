@@ -6,7 +6,6 @@ import { Input } from "@/components/base/input/input";
 import { UntitledLogo } from "@/components/foundations/logo/untitledui-logo";
 import { cx } from "@/utils/cx";
 import { MobileNavigationHeader } from "../base-components/mobile-header";
-import { NavAccountCard, type NavAccountType } from "../base-components/nav-account-card";
 import { NavItemBase } from "../base-components/nav-item";
 import { NavList } from "../base-components/nav-list";
 import type { NavItemType } from "../config";
@@ -24,8 +23,6 @@ interface SidebarNavigationDualTierProps {
     hideBorder?: boolean;
     /** The selected account ID of the nav account card. */
     selectedAccountId?: string;
-    /** The items of the nav account card. */
-    accountItems?: NavAccountType[];
 }
 
 export const SidebarNavigationDualTier = ({
@@ -34,8 +31,6 @@ export const SidebarNavigationDualTier = ({
     items,
     footerItems = [],
     featureCard,
-    selectedAccountId,
-    accountItems,
 }: SidebarNavigationDualTierProps) => {
     const activeItem = [...items, ...footerItems].find((item) => item.href === activeUrl || item.items?.some((subItem) => subItem.href === activeUrl));
     const [currentItem, setCurrentItem] = useState(activeItem || items[1]);
@@ -108,8 +103,6 @@ export const SidebarNavigationDualTier = ({
                     )}
 
                     {featureCard}
-
-                    <NavAccountCard selectedAccountId={selectedAccountId} items={accountItems} />
                 </div>
             </div>
         </aside>

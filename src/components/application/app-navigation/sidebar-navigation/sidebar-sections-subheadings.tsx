@@ -2,7 +2,6 @@ import { SearchLg } from "@untitledui/icons";
 import { ButtonUtility } from "@/components/base/buttons/button-utility";
 import { UntitledLogo } from "@/components/foundations/logo/untitledui-logo";
 import { MobileNavigationHeader } from "../base-components/mobile-header";
-import { NavAccountCard } from "../base-components/nav-account-card";
 import { NavItemBase } from "../base-components/nav-item";
 import type { NavItemType } from "../config";
 
@@ -48,10 +47,6 @@ export const SidebarNavigationSectionsSubheadings = ({ activeUrl = "/", items }:
                     </li>
                 ))}
             </ul>
-
-            <div className="mt-auto flex flex-col gap-5 px-2 py-4 lg:gap-6 lg:px-4 lg:py-4">
-                <NavAccountCard />
-            </div>
         </aside>
     );
 

@@ -3,19 +3,30 @@ import { MessageAI, MessageMe } from "./message";
 import { MessageInput } from "./message-input";
 import { ThemeSwitcher } from "./theme-switcher";
 
+type MessageType = {
+    author: string;
+    message: string;
+};
+
+type MessagesType = MessageType[];
+
 interface ChatWithAITypes { 
     activeLesson: number;
-    lessons: {
-        number?: number;
+    lessons: ({
         label: string;
-        href?: string;
-    }[];
+    } | {
+        number: number;
+        label: string;
+        href: string;
+    })[];
+    allMessages: MessagesType[];
+    addAllMessages: React.Dispatch<React.SetStateAction<MessagesType[]>>;
 }
 
 export const ChatWithAI: FC<ChatWithAITypes> = ({activeLesson, lessons, allMessages, addAllMessages}) =>  {
 
-    const messages = allMessages[activeLesson];
-    const pageRef = useRef(null);
+    const messages:MessagesType = allMessages[activeLesson];
+    const pageRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         pageRef.current?.scrollIntoView({ behavior: "auto" });
@@ -25,7 +36,7 @@ export const ChatWithAI: FC<ChatWithAITypes> = ({activeLesson, lessons, allMessa
 
         <section className="prose flex-1 flex flex-col max-w-none">
             <div className="hidden md:block fixed ml-5 p-4 w-[20%]">
-                <p>{activeLesson ? lessons.find(arr => arr.number==activeLesson)?.label : "Не выбрана никакая тема."}</p>
+                <p>{activeLesson ? lessons.find(arr => "number" in arr && arr.number === activeLesson)?.label : "Не выбрана никакая тема."}</p>
             </div>
             <div className="flex justify-center items-center flex-col mt-12">
                 {activeLesson ? <>
@@ -45,14 +56,14 @@ export const ChatWithAI: FC<ChatWithAITypes> = ({activeLesson, lessons, allMessa
                         <div ref={pageRef} />
                     </div>
                     <div className="w-[75%] md:w-[40%] flex bottom-6 fixed pt-5 overflow-hidden">
-                        <MessageInput activeLesson={activeLesson} addAllMessages={addAllMessages} allMessages={allMessages}/>
+                        <MessageInput activeLesson={activeLesson} addAllMessages={addAllMessages}/>
                     </div></>
                 : (
                     <div>
                         <h3>Выберите тему</h3>
                     </div>
                 )}
-                <div className="fixed right-[10px] md:right-[100px] top-16">
+                <div className="fixed right-2.5 md:right-25 top-16">
                     <ThemeSwitcher />
                 </div>
                 

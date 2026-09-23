@@ -1,12 +1,9 @@
 import type { ReactNode } from "react";
 import { SearchLg } from "@untitledui/icons";
 import { Input } from "@/components/base/input/input";
-import { UntitledLogo } from "@/components/foundations/logo/untitledui-logo";
 import { cx } from "@/utils/cx";
 import { MobileNavigationHeader } from "../base-components/mobile-header";
-import { NavAccountCard } from "../base-components/nav-account-card";
 import { NavItemBase } from "../base-components/nav-item";
-import { NavList } from "../base-components/nav-list";
 import type { NavItemType } from "../config";
 
 interface SidebarNavigationProps {
@@ -18,8 +15,6 @@ interface SidebarNavigationProps {
     footerItems?: NavItemType[];
     /** Feature card to display. */
     featureCard?: ReactNode;
-    /** Whether to show the account card. */
-    showAccountCard?: boolean;
     /** Whether to hide the right side border. */
     hideBorder?: boolean;
     /** Additional CSS classes to apply to the sidebar. */
@@ -28,6 +23,12 @@ interface SidebarNavigationProps {
     avatarRounded?: boolean;
 
     onLessonClick?: (lessonNumber: number) => void;
+
+    querySearch: string;
+
+    setQuerySearch: React.Dispatch<React.SetStateAction<string>>;
+
+    activeLesson: number;
 }
 
 export const SidebarNavigationSimple = ({
@@ -35,7 +36,6 @@ export const SidebarNavigationSimple = ({
     items,
     footerItems = [],
     featureCard,
-    showAccountCard = true,
     hideBorder = false,
     className,
     onLessonClick,
@@ -84,7 +84,7 @@ export const SidebarNavigationSimple = ({
 
                     return (
                         <li key={item.number}>
-                            <NavItemBase type="link" href={item.href} current={item.number === activeLesson} onClick={() => onLessonClick?.(item.number)}>
+                            <NavItemBase type="link" href={item.href} current={item.number === activeLesson} onClick={() => onLessonClick?.(item.number!)}>
                                 {item.label}
                             </NavItemBase>
                         </li>
@@ -106,8 +106,6 @@ export const SidebarNavigationSimple = ({
                 )}
 
                 {featureCard}
-
-                {showAccountCard && <NavAccountCard />}
             </div>
         </aside>
     );

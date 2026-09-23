@@ -9,7 +9,6 @@ import { UntitledLogo } from "@/components/foundations/logo/untitledui-logo";
 import { UntitledLogoMinimal } from "@/components/foundations/logo/untitledui-logo-minimal";
 import { cx } from "@/utils/cx";
 import { MobileNavigationHeader } from "../base-components/mobile-header";
-import { NavAccountCard, NavAccountMenu } from "../base-components/nav-account-card";
 import { NavButton } from "../base-components/nav-button";
 import { NavItemBase } from "../base-components/nav-item";
 import { NavList } from "../base-components/nav-list";
@@ -116,7 +115,6 @@ export const SidebarNavigationSlim = ({ activeUrl, items, footerItems = [], hide
                                 )
                             }
                         >
-                            <NavAccountMenu />
                         </AriaPopover>
                     </AriaDialogTrigger>
                 </div>
@@ -201,8 +199,6 @@ export const SidebarNavigationSlim = ({ activeUrl, items, footerItems = [], hide
                                 Settings
                             </NavItemBase>
                         </div>
-
-                        <NavAccountCard />
                     </div>
                 </aside>
             </MobileNavigationHeader>

@@ -2,39 +2,49 @@ import { FC, useRef, useState } from "react";
 import { TextAreaBase } from "../base/textarea/textarea";
 import { Button } from "../base/buttons/button";
 import { Send03 } from "@untitledui/icons";
-import { generateContent } from "../../utils/GeminiAPI";
+import { generateContent } from "@/utils/geminiAPI";
 import { addMessage } from "@/utils/localStorage";
+
+type MessageType = {
+    author: string;
+    message: string;
+};
+
+type MessagesType = MessageType[];
 
 interface MessageInputProps {
     activeLesson: number;
+    addAllMessages: React.Dispatch<React.SetStateAction<MessagesType[]>>;
 }
 
-export const MessageInput: FC<MessageInputProps> = ({activeLesson, addAllMessages, allMessages}) =>  {
+export const MessageInput: FC<MessageInputProps> = ({activeLesson, addAllMessages}) =>  {
 
-    const inputRef = useRef<null | string>(null);
+    const inputRef = useRef<null | HTMLTextAreaElement>(null);
     const [buttonIsDisabled, setButtonIsDisabled] = useState(false);
 
     const buttonClick = async () => {
         setButtonIsDisabled(true);
-        let message = inputRef.current?.value;
+        const message = inputRef.current?.value ?? "";
+        if (!message.trim()) return;
         let author = "Me";
         addMessage({activeLesson, message, author});
         addAllMessages(prev => {
             const next = prev.map(arr => [...arr]);
-            next[activeLesson] = [...next[activeLesson], { activeLesson, message, author }];
+            next[activeLesson] = [...(next[activeLesson] ?? []), { author, message }];
             return next;
         });
-        inputRef.current.value = "";
+
+        if (inputRef.current) inputRef.current.value = "";
 
         const prevMessage = message;
-        message = await generateContent(prevMessage, activeLesson);
+        const aiMessage = await generateContent(prevMessage, activeLesson);
         author = "AI";
         addAllMessages(prev => {
             const next = prev.map(arr => [...arr]);
-            next[activeLesson] = [...next[activeLesson], { activeLesson, message, author }];
+            next[activeLesson] = [...(next[activeLesson] ?? []), { author: author, message: aiMessage }];
             return next;
         });
-        addMessage({activeLesson, message, author});
+        addMessage({activeLesson, message: aiMessage, author: "AI"});
         setButtonIsDisabled(false);
     };
 

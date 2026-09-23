@@ -1,4 +1,9 @@
-export const topics = [
+export const topics: {
+    label: string;
+    number?: number;
+    href?: string;
+    onClick?: () => void;
+}[] = [
     {
         label: "Часть 1:",
     },
